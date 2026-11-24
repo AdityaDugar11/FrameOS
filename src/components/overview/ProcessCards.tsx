@@ -6,13 +6,11 @@ import {
   DownloadCloud, 
   Music, 
   MessageSquare,
-  Clock,
   HardDrive,
   Cpu,
   Layers
 } from 'lucide-react';
 import { useFrameOSStore } from '../../store/useFrameOSStore';
-import { ProcessId } from '../../types/simulation';
 
 const PROCESS_ICONS: Record<string, React.ElementType> = {
   Gamepad2,
@@ -42,13 +40,13 @@ export const ProcessCards: React.FC = () => {
     <div>
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
-          <Layers className="w-4 h-4 text-cyan-400" />
-          <h2 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-200">
-            Active System Processes ({processes.length})
+          <Layers className="w-4 h-4 text-slate-400" />
+          <h2 className="text-xs font-mono font-medium uppercase tracking-wider text-slate-300">
+            Active system processes ({processes.length})
           </h2>
         </div>
         <div className="text-[11px] font-mono text-slate-400">
-          Uniprocessor Architecture · 6 Processes at t = 0
+          Uniprocessor · 6 processes at t = 0
         </div>
       </div>
 
@@ -57,23 +55,20 @@ export const ProcessCards: React.FC = () => {
           const Icon = PROCESS_ICONS[proc.iconName] || Cpu;
           const isCurrentRunning = activeProcessId === proc.id;
           
-          // Determine dynamic process state based on simulation time
           const pMetrics = schedulerResult.processMetrics[proc.id];
           const hasFinished = simCurrentTime >= (pMetrics?.completionTime ?? 999);
           
-          let stateLabel: 'RUNNING' | 'READY' | 'WAITING' | 'TERMINATED' = 'READY';
+          let stateLabel: 'Running' | 'Ready' | 'Waiting' | 'Terminated' = 'Ready';
           if (hasFinished && simCurrentTime > 0) {
-            stateLabel = 'TERMINATED';
+            stateLabel = 'Terminated';
           } else if (isCurrentRunning) {
-            stateLabel = 'RUNNING';
+            stateLabel = 'Running';
           } else if (proc.id === 'G' && !isCurrentRunning && simCurrentTime > 0) {
-            // Check if game is waiting for I/O or Mutex
-            stateLabel = 'WAITING';
+            stateLabel = 'Waiting';
           } else {
-            stateLabel = 'READY';
+            stateLabel = 'Ready';
           }
 
-          // Memory details from memoryResult
           const memInfo = memoryResult.processes.find(p => p.id === proc.id);
           const allocatedGB = memInfo?.allocatedGB ?? proc.memoryGB;
           const swappedGB = memInfo?.swappedGB ?? 0;
@@ -81,76 +76,70 @@ export const ProcessCards: React.FC = () => {
           return (
             <div
               key={proc.id}
-              className={`glass-panel rounded-2xl p-4 flex flex-col justify-between border transition-all duration-300 relative overflow-hidden ${
+              className={`surface-subtle rounded-xl p-3.5 flex flex-col justify-between border transition-colors ${
                 isCurrentRunning
-                  ? 'border-cyan-400 shadow-glow-cyan bg-cyan-950/20 ring-1 ring-cyan-500/50'
-                  : stateLabel === 'WAITING'
-                  ? 'border-amber-700/50 bg-amber-950/10'
-                  : stateLabel === 'TERMINATED'
-                  ? 'border-slate-800/40 opacity-70 bg-dark-900/40'
-                  : 'border-slate-800 hover:border-slate-700'
+                  ? 'border-cyan-500/80 bg-dark-850'
+                  : stateLabel === 'Waiting'
+                  ? 'border-amber-700/50 bg-dark-900'
+                  : stateLabel === 'Terminated'
+                  ? 'border-slate-800/40 opacity-60 bg-dark-950'
+                  : 'border-slate-800/80 hover:border-slate-700'
               }`}
             >
-              {/* Subtle top indicator bar */}
-              <div 
-                className="absolute top-0 left-0 right-0 h-1 transition-all"
-                style={{ backgroundColor: proc.accentHex }}
-              />
-
               {/* Card Header: Icon, ID & State Badge */}
               <div className="flex items-start justify-between">
-                <div className="flex items-center gap-2.5">
+                <div className="flex items-center gap-2">
                   <div 
-                    className="w-8 h-8 rounded-xl flex items-center justify-center font-mono font-bold text-xs text-black shadow-md"
+                    className="w-7 h-7 rounded-lg flex items-center justify-center font-mono font-bold text-xs text-black"
                     style={{ backgroundColor: proc.accentHex }}
                   >
-                    <Icon className="w-4 h-4 text-black" />
+                    <Icon className="w-3.5 h-3.5 text-black" />
                   </div>
                   <div>
                     <div className="flex items-center gap-1.5">
-                      <span className="font-mono font-bold text-xs text-white">
+                      <span className="font-mono font-semibold text-xs text-white">
                         {proc.id}
                       </span>
                       <span className="text-[10px] text-slate-400 font-mono">
-                        PID #{1000 + processes.indexOf(proc) * 12}
+                        #{1000 + processes.indexOf(proc) * 12}
                       </span>
                     </div>
-                    <span className="text-[11px] font-semibold text-slate-200 block truncate max-w-[110px]" title={proc.name}>
+                    <span className="text-[11px] font-medium text-slate-300 block truncate max-w-[100px]" title={proc.name}>
                       {proc.shortName}
                     </span>
                   </div>
                 </div>
 
-                <span className={`text-[9px] font-mono font-bold px-2 py-0.5 rounded-full border ${
-                  stateLabel === 'RUNNING'
-                    ? 'bg-cyan-950 text-cyan-300 border-cyan-500 animate-pulse'
-                    : stateLabel === 'WAITING'
-                    ? 'bg-amber-950 text-amber-300 border-amber-600'
-                    : stateLabel === 'TERMINATED'
-                    ? 'bg-slate-800 text-slate-400 border-slate-700'
-                    : 'bg-blue-950/80 text-blue-300 border-blue-800/60'
+                <span className={`text-[10px] font-mono font-medium px-1.5 py-0.2 rounded border ${
+                  stateLabel === 'Running'
+                    ? 'bg-cyan-950/80 text-cyan-300 border-cyan-700'
+                    : stateLabel === 'Waiting'
+                    ? 'bg-amber-950/60 text-amber-300 border-amber-800'
+                    : stateLabel === 'Terminated'
+                    ? 'bg-dark-850 text-slate-400 border-slate-800'
+                    : 'bg-dark-850 text-slate-300 border-slate-800'
                 }`}>
                   {stateLabel}
                 </span>
               </div>
 
               {/* Middle Metrics: Burst & Memory */}
-              <div className="my-3 space-y-2 border-t border-b border-slate-800/80 py-2.5">
+              <div className="my-3 space-y-1.5 border-t border-b border-slate-800/80 py-2">
                 <div className="flex items-center justify-between text-xs">
                   <span className="text-slate-400 font-mono text-[11px] flex items-center gap-1">
-                    <Cpu className="w-3 h-3 text-cyan-400" /> CPU Burst:
+                    <Cpu className="w-3 h-3 text-slate-400" /> Burst:
                   </span>
-                  <span className="font-mono font-bold text-white">
+                  <span className="font-mono font-semibold text-slate-200">
                     {proc.cpuBurst} ms
                   </span>
                 </div>
 
                 <div className="flex items-center justify-between text-xs">
                   <span className="text-slate-400 font-mono text-[11px] flex items-center gap-1">
-                    <HardDrive className="w-3 h-3 text-purple-400" /> Memory:
+                    <HardDrive className="w-3 h-3 text-slate-400" /> RAM:
                   </span>
                   <div className="text-right">
-                    <span className="font-mono font-bold text-white">
+                    <span className="font-mono font-semibold text-slate-200">
                       {allocatedGB} GB
                     </span>
                     {swappedGB > 0 && (
@@ -165,12 +154,12 @@ export const ProcessCards: React.FC = () => {
               {/* Priority & Scheduling Info */}
               <div className="flex items-center justify-between text-[11px] font-mono">
                 <span className="text-slate-400">Priority:</span>
-                <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                <span className={`px-1.5 py-0.5 rounded text-[10px] font-medium ${
                   proc.priority === 'HIGH'
-                    ? 'bg-cyan-950 text-cyan-300 border border-cyan-800/80'
+                    ? 'bg-cyan-950/60 text-cyan-300 border border-cyan-800/60'
                     : proc.priority === 'MEDIUM'
-                    ? 'bg-amber-950 text-amber-300 border border-amber-800/80'
-                    : 'bg-slate-800 text-slate-400'
+                    ? 'bg-amber-950/60 text-amber-300 border border-amber-800/60'
+                    : 'bg-dark-850 text-slate-400 border border-slate-800'
                 }`}>
                   {proc.priority}
                 </span>

@@ -8,9 +8,8 @@ import {
   Sparkles, 
   Layers, 
   Presentation, 
-  Settings, 
+  SlidersHorizontal, 
   RotateCcw,
-  Zap,
   Activity,
   AlertTriangle,
   CheckCircle2
@@ -41,70 +40,70 @@ export const Sidebar: React.FC = () => {
 
   const navItems: NavItem[] = [
     { id: 'overview', label: 'Overview', icon: LayoutDashboard },
-    { id: 'scheduler', label: 'CPU Scheduler', icon: Cpu },
-    { id: 'memory', label: 'Memory Manager', icon: HardDrive },
+    { id: 'scheduler', label: 'CPU scheduler', icon: Cpu },
+    { id: 'memory', label: 'Memory manager', icon: HardDrive },
     { id: 'io', label: 'I/O & DMA', icon: Network },
-    { id: 'sync', label: 'Process Sync', icon: Lock },
-    { id: 'optimization', label: 'Optimization Center', icon: Sparkles, badge: `${activeOptimizationsCount}/8` },
-    { id: 'architecture', label: 'System Architecture', icon: Layers },
+    { id: 'sync', label: 'Process sync', icon: Lock },
+    { id: 'optimization', label: 'Optimization center', icon: Sparkles, badge: `${activeOptimizationsCount}/8` },
+    { id: 'architecture', label: 'System architecture', icon: Layers },
   ];
 
   return (
     <aside className="w-64 bg-dark-900 border-r border-slate-800/80 flex flex-col justify-between shrink-0 select-none z-20">
-      {/* Brand Header */}
       <div>
-        <div className="p-4 border-b border-slate-800/80">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center shadow-lg shadow-cyan-500/20 text-black">
-              <Zap className="w-6 h-6 fill-current" />
+        {/* Brand Header */}
+        <div className="p-4 border-b border-slate-800/70">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-lg bg-dark-800 border border-slate-700/80 flex items-center justify-center text-cyan-400">
+              <Activity className="w-4 h-4" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="font-extrabold tracking-wider text-lg bg-gradient-to-r from-white via-cyan-200 to-cyan-400 bg-clip-text text-transparent">
+                <span className="font-semibold tracking-tight text-sm text-white">
                   FrameOS
                 </span>
-                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-cyan-950 text-cyan-400 border border-cyan-800/60 font-semibold">
+                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-dark-800 text-slate-400 border border-slate-700/60 font-medium">
                   v2.0
                 </span>
               </div>
-              <p className="text-[11px] text-slate-400 font-mono tracking-tight">
-                Gaming PC Simulator
+              <p className="text-[11px] text-slate-400 font-mono">
+                Gaming PC simulator
               </p>
             </div>
           </div>
           
-          <div className="mt-3 text-[10px] text-slate-400/90 font-mono italic flex items-center gap-1.5 bg-dark-850 px-2.5 py-1.5 rounded-lg border border-slate-800/60">
-            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
-            "A freeze is a missed deadline."
+          <div className="mt-3 text-[10px] text-slate-400 font-mono flex items-center gap-2 bg-dark-950 px-2.5 py-1.5 rounded-lg border border-slate-800/80">
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
+            <span>A freeze is a missed deadline</span>
           </div>
         </div>
 
         {/* System Simulation Status Banner */}
         <div className="px-3 pt-3">
-          <div className={`p-2.5 rounded-xl border transition-all ${
+          <div className={`p-2.5 rounded-xl border ${
             isOptimized 
-              ? 'bg-emerald-950/40 border-emerald-800/60 text-emerald-400' 
+              ? 'bg-emerald-950/20 border-emerald-800/50 text-emerald-300' 
               : activeOptimizationsCount > 0
-              ? 'bg-amber-950/40 border-amber-800/60 text-amber-400'
-              : 'bg-rose-950/40 border-rose-800/60 text-rose-400'
+              ? 'bg-amber-950/20 border-amber-800/50 text-amber-300'
+              : 'bg-rose-950/20 border-rose-800/50 text-rose-300'
           }`}>
-            <div className="flex items-center justify-between text-xs font-semibold">
+            <div className="flex items-center justify-between text-xs font-medium">
               <div className="flex items-center gap-1.5">
                 {isOptimized ? (
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
                 ) : (
-                  <AlertTriangle className="w-4 h-4 text-rose-400" />
+                  <AlertTriangle className="w-3.5 h-3.5 text-rose-400" />
                 )}
-                <span>{isOptimized ? 'Optimized Mode' : activeOptimizationsCount > 0 ? 'Custom Setup' : 'Baseline Problem'}</span>
+                <span>{isOptimized ? 'Optimized profile' : activeOptimizationsCount > 0 ? 'Custom profile' : 'Baseline bottleneck'}</span>
               </div>
-              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-black/40">
+              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-dark-950 border border-slate-800">
                 {isOptimized ? '60 FPS' : '28 FPS'}
               </span>
             </div>
-            <p className="text-[10px] text-slate-400 mt-1 leading-tight">
+            <p className="text-[10px] text-slate-400 mt-1 leading-snug">
               {isOptimized 
-                ? 'All 4 OS bottlenecks mitigated. Target frame deadline locked.' 
-                : 'Paging stalls, scheduling lag & priority inversion active.'}
+                ? 'All four kernel bottlenecks mitigated.' 
+                : 'Paging stalls, scheduling lag & inversion active.'}
             </p>
           </div>
         </div>
@@ -121,23 +120,23 @@ export const Sidebar: React.FC = () => {
               <button
                 key={item.id}
                 onClick={() => setActiveTab(item.id)}
-                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-medium transition-all group ${
+                className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium transition-colors group ${
                   isActive
-                    ? 'bg-gradient-to-r from-cyan-500/20 to-blue-600/10 text-cyan-300 border border-cyan-500/30 shadow-sm shadow-cyan-500/10'
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-dark-800/60 border border-transparent'
+                    ? 'bg-dark-800 text-cyan-300 border border-slate-700/80 shadow-sm'
+                    : 'text-slate-400 hover:text-slate-200 hover:bg-dark-850 border border-transparent'
                 }`}
               >
-                <div className="flex items-center gap-3">
-                  <Icon className={`w-4 h-4 transition-colors ${
-                    isActive ? 'text-cyan-400' : 'text-slate-400 group-hover:text-slate-200'
+                <div className="flex items-center gap-2.5">
+                  <Icon className={`w-4 h-4 ${
+                    isActive ? 'text-cyan-400' : 'text-slate-400 group-hover:text-slate-300'
                   }`} />
                   <span>{item.label}</span>
                 </div>
                 {item.badge && (
-                  <span className={`text-[10px] font-mono px-1.5 py-0.5 rounded font-semibold ${
+                  <span className={`text-[10px] font-mono px-1.5 py-0.2 rounded ${
                     activeOptimizationsCount === 8
                       ? 'bg-emerald-950 text-emerald-400 border border-emerald-800/60'
-                      : 'bg-dark-800 text-slate-400 border border-slate-700/60'
+                      : 'bg-dark-950 text-slate-400 border border-slate-800'
                   }`}>
                     {item.badge}
                   </span>
@@ -152,38 +151,36 @@ export const Sidebar: React.FC = () => {
       <div className="p-3 border-t border-slate-800/80 space-y-2">
         <button
           onClick={() => setPresentationMode(!presentationMode)}
-          className={`w-full flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-xs font-semibold transition-all border ${
+          className={`w-full flex items-center justify-center gap-2 py-2 px-3 rounded-lg text-xs font-medium transition-colors border ${
             presentationMode
-              ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white border-purple-400/50 shadow-lg shadow-purple-500/25'
-              : 'bg-purple-950/30 text-purple-300 hover:bg-purple-950/60 border-purple-800/40 hover:border-purple-600/60'
+              ? 'bg-cyan-500 text-black border-cyan-400 font-semibold'
+              : 'bg-dark-800 text-slate-300 hover:bg-dark-750 hover:text-white border-slate-700'
           }`}
         >
-          <Presentation className="w-4 h-4 text-purple-300" />
-          <span>{presentationMode ? 'Exit Presentation' : 'Presentation Mode'}</span>
+          <Presentation className="w-3.5 h-3.5" />
+          <span>{presentationMode ? 'Exit presentation' : 'Presentation mode'}</span>
         </button>
 
         <div className="grid grid-cols-2 gap-2">
           <button
             onClick={() => setSettingsOpen(true)}
-            className="flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-lg text-xs font-medium text-slate-300 bg-dark-800 hover:bg-dark-700 hover:text-white border border-slate-700/60 transition-colors"
-            title="Configure System Parameters"
+            className="flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg text-xs font-medium text-slate-300 bg-dark-850 hover:bg-dark-800 hover:text-white border border-slate-800 transition-colors"
           >
-            <Settings className="w-3.5 h-3.5 text-slate-400" />
+            <SlidersHorizontal className="w-3 h-3 text-slate-400" />
             <span>Config</span>
           </button>
           <button
             onClick={resetToAcademicDefaults}
-            className="flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-lg text-xs font-medium text-rose-300 bg-rose-950/20 hover:bg-rose-950/50 border border-rose-800/40 transition-colors"
-            title="Reset to Case Study Defaults"
+            className="flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg text-xs font-medium text-rose-300 bg-rose-950/20 hover:bg-rose-950/40 border border-rose-900/40 transition-colors"
           >
-            <RotateCcw className="w-3.5 h-3.5 text-rose-400" />
+            <RotateCcw className="w-3 h-3 text-rose-400" />
             <span>Reset</span>
           </button>
         </div>
 
         <div className="pt-1 text-center">
           <span className="text-[10px] text-slate-400 font-mono">
-            Academic Model · Uniprocessor
+            Academic model · Uniprocessor
           </span>
         </div>
       </div>
