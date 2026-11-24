@@ -40,12 +40,12 @@ export const ProcessCards: React.FC = () => {
     <div>
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
-          <Layers className="w-4 h-4 text-slate-400" />
-          <h2 className="text-xs font-mono font-medium uppercase tracking-wider text-slate-300">
+          <Layers className="w-4 h-4 text-ink-muted" />
+          <h2 className="text-xs font-mono font-semibold uppercase tracking-wider text-ink-secondary">
             Active system processes ({processes.length})
           </h2>
         </div>
-        <div className="text-[11px] font-mono text-slate-400">
+        <div className="text-[11px] font-mono text-ink-muted">
           Uniprocessor · 6 processes at t = 0
         </div>
       </div>
@@ -76,74 +76,74 @@ export const ProcessCards: React.FC = () => {
           return (
             <div
               key={proc.id}
-              className={`surface-subtle rounded-xl p-3.5 flex flex-col justify-between border transition-colors ${
+              className={`rounded-lg p-3.5 flex flex-col justify-between border transition-all shadow-xs ${
                 isCurrentRunning
-                  ? 'border-cyan-500/80 bg-dark-850'
+                  ? 'border-ink-primary bg-paper-100 shadow-sm'
                   : stateLabel === 'Waiting'
-                  ? 'border-amber-700/50 bg-dark-900'
+                  ? 'border-amber-300 bg-amber-50/40'
                   : stateLabel === 'Terminated'
-                  ? 'border-slate-800/40 opacity-60 bg-dark-950'
-                  : 'border-slate-800/80 hover:border-slate-700'
+                  ? 'border-paper-300 opacity-60 bg-paper-200/50'
+                  : 'bg-paper-50 border-paper-300 hover:border-paper-400'
               }`}
             >
               {/* Card Header: Icon, ID & State Badge */}
               <div className="flex items-start justify-between">
                 <div className="flex items-center gap-2">
                   <div 
-                    className="w-7 h-7 rounded-lg flex items-center justify-center font-mono font-bold text-xs text-black"
+                    className="w-7 h-7 rounded-md flex items-center justify-center font-mono font-bold text-xs text-white shadow-xs"
                     style={{ backgroundColor: proc.accentHex }}
                   >
-                    <Icon className="w-3.5 h-3.5 text-black" />
+                    <Icon className="w-3.5 h-3.5 text-white" />
                   </div>
                   <div>
                     <div className="flex items-center gap-1.5">
-                      <span className="font-mono font-semibold text-xs text-white">
+                      <span className="font-mono font-semibold text-xs text-ink-primary">
                         {proc.id}
                       </span>
-                      <span className="text-[10px] text-slate-400 font-mono">
+                      <span className="text-[10px] text-ink-muted font-mono">
                         #{1000 + processes.indexOf(proc) * 12}
                       </span>
                     </div>
-                    <span className="text-[11px] font-medium text-slate-300 block truncate max-w-[100px]" title={proc.name}>
+                    <span className="text-[11px] font-medium text-ink-secondary block truncate max-w-[100px]" title={proc.name}>
                       {proc.shortName}
                     </span>
                   </div>
                 </div>
 
-                <span className={`text-[10px] font-mono font-medium px-1.5 py-0.2 rounded border ${
+                <span className={`text-[10px] font-mono font-semibold px-1.5 py-0.5 rounded border ${
                   stateLabel === 'Running'
-                    ? 'bg-cyan-950/80 text-cyan-300 border-cyan-700'
+                    ? 'bg-paper-200 text-ink-primary border-ink-primary'
                     : stateLabel === 'Waiting'
-                    ? 'bg-amber-950/60 text-amber-300 border-amber-800'
+                    ? 'bg-amber-100 text-amber-900 border-amber-300'
                     : stateLabel === 'Terminated'
-                    ? 'bg-dark-850 text-slate-400 border-slate-800'
-                    : 'bg-dark-850 text-slate-300 border-slate-800'
+                    ? 'bg-paper-200 text-ink-muted border-paper-300'
+                    : 'bg-paper-100 text-ink-secondary border-paper-300'
                 }`}>
                   {stateLabel}
                 </span>
               </div>
 
               {/* Middle Metrics: Burst & Memory */}
-              <div className="my-3 space-y-1.5 border-t border-b border-slate-800/80 py-2">
+              <div className="my-3 space-y-1.5 border-t border-b border-paper-300 py-2">
                 <div className="flex items-center justify-between text-xs">
-                  <span className="text-slate-400 font-mono text-[11px] flex items-center gap-1">
-                    <Cpu className="w-3 h-3 text-slate-400" /> Burst:
+                  <span className="text-ink-secondary font-mono text-[11px] flex items-center gap-1">
+                    <Cpu className="w-3 h-3 text-ink-muted" /> Burst:
                   </span>
-                  <span className="font-mono font-semibold text-slate-200">
+                  <span className="font-mono font-semibold text-ink-primary">
                     {proc.cpuBurst} ms
                   </span>
                 </div>
 
                 <div className="flex items-center justify-between text-xs">
-                  <span className="text-slate-400 font-mono text-[11px] flex items-center gap-1">
-                    <HardDrive className="w-3 h-3 text-slate-400" /> RAM:
+                  <span className="text-ink-secondary font-mono text-[11px] flex items-center gap-1">
+                    <HardDrive className="w-3 h-3 text-ink-muted" /> RAM:
                   </span>
                   <div className="text-right">
-                    <span className="font-mono font-semibold text-slate-200">
+                    <span className="font-mono font-semibold text-ink-primary">
                       {allocatedGB} GB
                     </span>
                     {swappedGB > 0 && (
-                      <span className="text-[9px] text-rose-400 font-mono block">
+                      <span className="text-[9px] text-red-700 font-mono block font-medium">
                         ({swappedGB} GB swap)
                       </span>
                     )}
@@ -153,13 +153,13 @@ export const ProcessCards: React.FC = () => {
 
               {/* Priority & Scheduling Info */}
               <div className="flex items-center justify-between text-[11px] font-mono">
-                <span className="text-slate-400">Priority:</span>
-                <span className={`px-1.5 py-0.5 rounded text-[10px] font-medium ${
+                <span className="text-ink-muted">Priority:</span>
+                <span className={`px-1.5 py-0.5 rounded text-[10px] font-semibold ${
                   proc.priority === 'HIGH'
-                    ? 'bg-cyan-950/60 text-cyan-300 border border-cyan-800/60'
+                    ? 'bg-copper-600/10 text-copper-700 border border-copper-300'
                     : proc.priority === 'MEDIUM'
-                    ? 'bg-amber-950/60 text-amber-300 border border-amber-800/60'
-                    : 'bg-dark-850 text-slate-400 border border-slate-800'
+                    ? 'bg-amber-100 text-amber-900 border border-amber-300'
+                    : 'bg-paper-200 text-ink-muted border border-paper-300'
                 }`}>
                   {proc.priority}
                 </span>

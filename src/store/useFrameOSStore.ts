@@ -33,10 +33,6 @@ interface FrameOSState {
   setActiveTab: (tab: NavigationTab) => void;
   isSettingsOpen: boolean;
   setSettingsOpen: (open: boolean) => void;
-  presentationMode: boolean;
-  setPresentationMode: (active: boolean) => void;
-  presentationStep: number;
-  setPresentationStep: (step: number) => void;
 
   // Configuration
   processes: ProcessDefinition[];
@@ -97,10 +93,6 @@ export const useFrameOSStore = create<FrameOSState>((set, get) => {
     setActiveTab: (tab) => set({ activeTab: tab }),
     isSettingsOpen: false,
     setSettingsOpen: (open) => set({ isSettingsOpen: open }),
-    presentationMode: false,
-    setPresentationMode: (active) => set({ presentationMode: active }),
-    presentationStep: 0,
-    setPresentationStep: (step) => set({ presentationStep: step }),
 
     processes: [...INITIAL_PROCESSES],
     memoryConfig: { ...DEFAULT_MEMORY_CONFIG },

@@ -3,7 +3,6 @@ import { useFrameOSStore } from './store/useFrameOSStore';
 import { Sidebar } from './components/layout/Sidebar';
 import { Header } from './components/layout/Header';
 import { SettingsModal } from './components/layout/SettingsModal';
-import { PresentationOverlay } from './components/presentation/PresentationOverlay';
 
 // Page 1: Overview
 import { MetricCards } from './components/overview/MetricCards';
@@ -62,7 +61,7 @@ export default function App() {
   }, [isPlaying, playbackSpeed, stepForward]);
 
   return (
-    <div className="flex h-screen w-screen overflow-hidden bg-[#06080d] text-slate-100 font-sans">
+    <div className="flex h-screen w-screen overflow-hidden bg-[#f7f4ee] text-[#1f1b16] font-sans antialiased">
       {/* Persistent Sidebar Navigation */}
       <Sidebar />
 
@@ -72,21 +71,19 @@ export default function App() {
         <Header />
 
         {/* Dynamic Page Router */}
-        <main className="flex-1 overflow-y-auto p-5 sm:p-6 space-y-6">
+        <main className="flex-1 overflow-y-auto p-5 sm:p-6 space-y-5 bg-[#f7f4ee]">
           {activeTab === 'overview' && (
-            <div className="space-y-5 animate-in fade-in duration-200">
+            <div className="space-y-5">
               <MetricCards />
               <ReadyQueueLive />
               <ProcessCards />
-              <div className="grid grid-cols-1 gap-5">
-                <PerformanceCharts />
-                <BottlenecksPanel />
-              </div>
+              <PerformanceCharts />
+              <BottlenecksPanel />
             </div>
           )}
 
           {activeTab === 'scheduler' && (
-            <div className="space-y-5 animate-in fade-in duration-200">
+            <div className="space-y-5">
               <SchedulerControls />
               <GanttChart />
               <FrameDeadlineTracker />
@@ -95,7 +92,7 @@ export default function App() {
           )}
 
           {activeTab === 'memory' && (
-            <div className="space-y-5 animate-in fade-in duration-200">
+            <div className="space-y-5">
               <WorkingSetControl />
               <PagingVisualizer />
               <CacheSimulator />
@@ -104,7 +101,7 @@ export default function App() {
           )}
 
           {activeTab === 'io' && (
-            <div className="space-y-5 animate-in fade-in duration-200">
+            <div className="space-y-5">
               <DiskQueueSimulator />
               <DmaVsPioComparison />
               <InterruptSourcesPanel />
@@ -112,14 +109,14 @@ export default function App() {
           )}
 
           {activeTab === 'sync' && (
-            <div className="space-y-5 animate-in fade-in duration-200">
+            <div className="space-y-5">
               <PriorityInversionTimeline />
               <MutexStateVisualizer />
             </div>
           )}
 
           {activeTab === 'optimization' && (
-            <div className="space-y-5 animate-in fade-in duration-200">
+            <div className="space-y-5">
               <OptimizationMatrix />
               <BeforeAfterComparison />
               <TradeoffAnalysis />
@@ -127,16 +124,15 @@ export default function App() {
           )}
 
           {activeTab === 'architecture' && (
-            <div className="space-y-5 animate-in fade-in duration-200">
+            <div className="space-y-5">
               <ArchitectureDiagram />
             </div>
           )}
         </main>
       </div>
 
-      {/* Modals & Overlays */}
+      {/* Settings Modal */}
       <SettingsModal />
-      <PresentationOverlay />
     </div>
   );
 }

@@ -55,58 +55,58 @@ export const PerformanceCharts: React.FC = () => {
   });
 
   return (
-    <div className="glass-panel rounded-xl p-4 border border-slate-800/80">
+    <div className="bg-paper-50 rounded-lg p-4 border border-paper-300 shadow-xs">
       {/* Chart Controls & Tabs */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
         <div>
           <div className="flex items-center gap-2">
-            <Activity className="w-4 h-4 text-slate-400" />
-            <h3 className="text-xs font-mono font-medium uppercase tracking-wider text-slate-200">
+            <Activity className="w-4 h-4 text-ink-muted" />
+            <h3 className="text-xs font-mono font-semibold uppercase tracking-wider text-ink-primary">
               Telemetry over time
             </h3>
           </div>
-          <p className="text-[11px] text-slate-400">
+          <p className="text-[11px] text-ink-secondary">
             Deterministic simulation profile across consecutive game loops
           </p>
         </div>
 
-        <div className="flex items-center gap-1 bg-dark-950 p-1 rounded-lg border border-slate-800">
+        <div className="flex items-center gap-1 bg-paper-200 p-1 rounded border border-paper-300">
           <button
             onClick={() => setActiveMetric('fps')}
-            className={`px-2.5 py-1 rounded text-xs font-mono font-medium transition-colors ${
+            className={`px-2.5 py-1 rounded text-xs font-mono transition-colors ${
               activeMetric === 'fps'
-                ? 'bg-dark-800 text-cyan-300 border border-slate-700'
-                : 'text-slate-400 hover:text-white'
+                ? 'bg-paper-50 text-ink-primary font-semibold border border-paper-300 shadow-xs'
+                : 'text-ink-secondary hover:text-ink-primary'
             }`}
           >
             FPS
           </button>
           <button
             onClick={() => setActiveMetric('cpu')}
-            className={`px-2.5 py-1 rounded text-xs font-mono font-medium transition-colors ${
+            className={`px-2.5 py-1 rounded text-xs font-mono transition-colors ${
               activeMetric === 'cpu'
-                ? 'bg-dark-800 text-amber-300 border border-slate-700'
-                : 'text-slate-400 hover:text-white'
+                ? 'bg-paper-50 text-ink-primary font-semibold border border-paper-300 shadow-xs'
+                : 'text-ink-secondary hover:text-ink-primary'
             }`}
           >
             CPU %
           </button>
           <button
             onClick={() => setActiveMetric('ram')}
-            className={`px-2.5 py-1 rounded text-xs font-mono font-medium transition-colors ${
+            className={`px-2.5 py-1 rounded text-xs font-mono transition-colors ${
               activeMetric === 'ram'
-                ? 'bg-dark-800 text-purple-300 border border-slate-700'
-                : 'text-slate-400 hover:text-white'
+                ? 'bg-paper-50 text-ink-primary font-semibold border border-paper-300 shadow-xs'
+                : 'text-ink-secondary hover:text-ink-primary'
             }`}
           >
             RAM (GB)
           </button>
           <button
             onClick={() => setActiveMetric('disk')}
-            className={`px-2.5 py-1 rounded text-xs font-mono font-medium transition-colors ${
+            className={`px-2.5 py-1 rounded text-xs font-mono transition-colors ${
               activeMetric === 'disk'
-                ? 'bg-dark-800 text-rose-300 border border-slate-700'
-                : 'text-slate-400 hover:text-white'
+                ? 'bg-paper-50 text-ink-primary font-semibold border border-paper-300 shadow-xs'
+                : 'text-ink-secondary hover:text-ink-primary'
             }`}
           >
             Disk queue
@@ -119,76 +119,76 @@ export const PerformanceCharts: React.FC = () => {
         <ResponsiveContainer width="100%" height="100%">
           {activeMetric === 'fps' ? (
             <AreaChart data={chartData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#161e2e" />
-              <XAxis dataKey="time" stroke="#475569" tick={{ fontSize: 10, fill: '#64748b' }} />
-              <YAxis domain={[0, 75]} stroke="#475569" tick={{ fontSize: 10, fill: '#64748b' }} />
+              <CartesianGrid strokeDasharray="3 3" stroke="#e7e2d7" />
+              <XAxis dataKey="time" stroke="#7b7266" tick={{ fontSize: 10, fill: '#5e554a' }} />
+              <YAxis domain={[0, 75]} stroke="#7b7266" tick={{ fontSize: 10, fill: '#5e554a' }} />
               <Tooltip 
-                contentStyle={{ backgroundColor: '#0b0f17', borderColor: '#1e293b', borderRadius: '8px', fontSize: '11px', color: '#fff' }}
-                itemStyle={{ color: '#38bdf8', fontFamily: 'monospace' }}
+                contentStyle={{ backgroundColor: '#fdfbf7', borderColor: '#ded6c8', borderRadius: '6px', fontSize: '11px', color: '#1f1b16' }}
+                itemStyle={{ color: '#15803d', fontFamily: 'monospace' }}
               />
               <Area 
                 type="monotone" 
                 dataKey="fps" 
-                stroke="#00d0e6" 
+                stroke="#15803d" 
                 strokeWidth={2}
-                fill="#00d0e6"
-                fillOpacity={0.08} 
+                fill="#15803d" 
+                fillOpacity={0.12} 
                 name="Rendered FPS"
               />
             </AreaChart>
           ) : activeMetric === 'cpu' ? (
             <AreaChart data={chartData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#161e2e" />
-              <XAxis dataKey="time" stroke="#475569" tick={{ fontSize: 10, fill: '#64748b' }} />
-              <YAxis domain={[0, 100]} stroke="#475569" tick={{ fontSize: 10, fill: '#64748b' }} />
+              <CartesianGrid strokeDasharray="3 3" stroke="#e7e2d7" />
+              <XAxis dataKey="time" stroke="#7b7266" tick={{ fontSize: 10, fill: '#5e554a' }} />
+              <YAxis domain={[0, 100]} stroke="#7b7266" tick={{ fontSize: 10, fill: '#5e554a' }} />
               <Tooltip 
-                contentStyle={{ backgroundColor: '#0b0f17', borderColor: '#1e293b', borderRadius: '8px', fontSize: '11px', color: '#fff' }}
-                itemStyle={{ color: '#fbbf24', fontFamily: 'monospace' }}
+                contentStyle={{ backgroundColor: '#fdfbf7', borderColor: '#ded6c8', borderRadius: '6px', fontSize: '11px', color: '#1f1b16' }}
+                itemStyle={{ color: '#b45309', fontFamily: 'monospace' }}
               />
               <Area 
                 type="monotone" 
                 dataKey="cpu" 
-                stroke="#f59e0b" 
+                stroke="#c2410c" 
                 strokeWidth={2}
-                fill="#f59e0b"
-                fillOpacity={0.08} 
+                fill="#c2410c" 
+                fillOpacity={0.12} 
                 name="CPU utilization %"
               />
             </AreaChart>
           ) : activeMetric === 'ram' ? (
             <LineChart data={chartData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#161e2e" />
-              <XAxis dataKey="time" stroke="#475569" tick={{ fontSize: 10, fill: '#64748b' }} />
-              <YAxis domain={[10, 20]} stroke="#475569" tick={{ fontSize: 10, fill: '#64748b' }} />
+              <CartesianGrid strokeDasharray="3 3" stroke="#e7e2d7" />
+              <XAxis dataKey="time" stroke="#7b7266" tick={{ fontSize: 10, fill: '#5e554a' }} />
+              <YAxis domain={[10, 20]} stroke="#7b7266" tick={{ fontSize: 10, fill: '#5e554a' }} />
               <Tooltip 
-                contentStyle={{ backgroundColor: '#0b0f17', borderColor: '#1e293b', borderRadius: '8px', fontSize: '11px', color: '#fff' }}
-                itemStyle={{ color: '#c084fc', fontFamily: 'monospace' }}
+                contentStyle={{ backgroundColor: '#fdfbf7', borderColor: '#ded6c8', borderRadius: '6px', fontSize: '11px', color: '#1f1b16' }}
+                itemStyle={{ color: '#7c3aed', fontFamily: 'monospace' }}
               />
               <Line 
                 type="stepAfter" 
                 dataKey="ram" 
-                stroke="#a855f7" 
+                stroke="#7c3aed" 
                 strokeWidth={2}
-                dot={{ fill: '#a855f7', r: 2.5 }}
+                dot={{ fill: '#7c3aed', r: 2.5 }}
                 name="Memory demand (GB)"
               />
             </LineChart>
           ) : (
             <AreaChart data={chartData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#161e2e" />
-              <XAxis dataKey="time" stroke="#475569" tick={{ fontSize: 10, fill: '#64748b' }} />
-              <YAxis domain={[0, 80]} stroke="#475569" tick={{ fontSize: 10, fill: '#64748b' }} />
+              <CartesianGrid strokeDasharray="3 3" stroke="#e7e2d7" />
+              <XAxis dataKey="time" stroke="#7b7266" tick={{ fontSize: 10, fill: '#5e554a' }} />
+              <YAxis domain={[0, 80]} stroke="#7b7266" tick={{ fontSize: 10, fill: '#5e554a' }} />
               <Tooltip 
-                contentStyle={{ backgroundColor: '#0b0f17', borderColor: '#1e293b', borderRadius: '8px', fontSize: '11px', color: '#fff' }}
-                itemStyle={{ color: '#fb7185', fontFamily: 'monospace' }}
+                contentStyle={{ backgroundColor: '#fdfbf7', borderColor: '#ded6c8', borderRadius: '6px', fontSize: '11px', color: '#1f1b16' }}
+                itemStyle={{ color: '#dc2626', fontFamily: 'monospace' }}
               />
               <Area 
                 type="monotone" 
                 dataKey="diskQueue" 
-                stroke="#f43f5e" 
+                stroke="#dc2626" 
                 strokeWidth={2}
-                fill="#f43f5e"
-                fillOpacity={0.08} 
+                fill="#dc2626" 
+                fillOpacity={0.12} 
                 name="Queued disk requests"
               />
             </AreaChart>
@@ -197,20 +197,20 @@ export const PerformanceCharts: React.FC = () => {
       </div>
 
       {/* Metric Insight Footer */}
-      <div className="mt-2 pt-2 border-t border-slate-800/80 flex items-center justify-between text-xs">
+      <div className="mt-2 pt-2 border-t border-paper-300 flex items-center justify-between text-xs">
         <div className="flex items-center gap-2">
-          <span className="font-mono text-[11px] text-slate-400">Status:</span>
+          <span className="font-mono text-[11px] text-ink-muted">Status:</span>
           {isAllOptimized ? (
-            <span className="text-emerald-400 font-mono font-medium flex items-center gap-1">
+            <span className="text-emerald-700 font-mono font-medium flex items-center gap-1">
               <Check className="w-3.5 h-3.5" /> 60 FPS target frame rate maintained
             </span>
           ) : (
-            <span className="text-rose-400 font-mono font-medium flex items-center gap-1">
+            <span className="text-red-700 font-mono font-medium flex items-center gap-1">
               <AlertTriangle className="w-3.5 h-3.5" /> Frame drops detected (average {activeMetric === 'fps' ? '28 FPS' : 'stutter'})
             </span>
           )}
         </div>
-        <span className="text-[10px] font-mono text-slate-400">
+        <span className="text-[10px] font-mono text-ink-muted">
           Target frame budget: 16.67 ms
         </span>
       </div>

@@ -26,33 +26,33 @@ export const MetricCards: React.FC = () => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-3">
       {/* 1. CPU Utilization Card */}
-      <div className="glass-panel rounded-xl p-3.5 flex flex-col justify-between border border-slate-800/80">
+      <div className="bg-paper-50 rounded-lg p-3.5 flex flex-col justify-between border border-paper-300 shadow-xs">
         <div className="flex items-center justify-between">
-          <span className="text-[11px] font-mono text-slate-400">
+          <span className="text-[11px] font-mono text-ink-secondary">
             CPU utilization
           </span>
-          <div className="p-1 rounded bg-dark-850 text-slate-400 border border-slate-800">
+          <div className="p-1 rounded bg-paper-200 text-ink-muted border border-paper-300">
             <Cpu className="w-3.5 h-3.5" />
           </div>
         </div>
 
         <div className="mt-2">
           <div className="flex items-baseline gap-1.5">
-            <span className="text-xl font-semibold font-mono text-white">
+            <span className="text-xl font-semibold font-mono text-ink-primary">
               {isDma ? '18.4%' : '41.2%'}
             </span>
-            <span className="text-[10px] text-amber-400 font-mono">
+            <span className="text-[10px] text-amber-800 font-mono font-medium">
               (stalling)
             </span>
           </div>
-          <div className="w-full bg-dark-950 h-1.5 rounded-full mt-2 overflow-hidden border border-slate-800/60">
+          <div className="w-full bg-paper-200 h-1.5 rounded-full mt-2 overflow-hidden border border-paper-300">
             <div 
-              className={`h-full transition-colors ${isDma ? 'bg-cyan-400 w-[18%]' : 'bg-amber-400 w-[41%]'}`} 
+              className={`h-full transition-all ${isDma ? 'bg-emerald-600 w-[18%]' : 'bg-amber-600 w-[41%]'}`} 
             />
           </div>
         </div>
 
-        <p className="text-[10px] text-slate-400 mt-2 leading-tight">
+        <p className="text-[10px] text-ink-muted mt-2 leading-tight">
           {isDma 
             ? 'DMA active: 0.38% overhead' 
             : 'Paging stalls force CPU idle during game freeze'}
@@ -60,34 +60,34 @@ export const MetricCards: React.FC = () => {
       </div>
 
       {/* 2. RAM Consumption Card */}
-      <div className="glass-panel rounded-xl p-3.5 flex flex-col justify-between border border-slate-800/80">
+      <div className="bg-paper-50 rounded-lg p-3.5 flex flex-col justify-between border border-paper-300 shadow-xs">
         <div className="flex items-center justify-between">
-          <span className="text-[11px] font-mono text-slate-400">
+          <span className="text-[11px] font-mono text-ink-secondary">
             RAM consumption
           </span>
-          <div className="p-1 rounded bg-dark-850 text-slate-400 border border-slate-800">
+          <div className="p-1 rounded bg-paper-200 text-ink-muted border border-paper-300">
             <HardDrive className="w-3.5 h-3.5" />
           </div>
         </div>
 
         <div className="mt-2">
           <div className="flex items-baseline gap-1.5">
-            <span className="text-xl font-semibold font-mono text-white">
+            <span className="text-xl font-semibold font-mono text-ink-primary">
               {memoryResult.totalMemoryDemandGB}
             </span>
-            <span className="text-xs font-mono text-slate-400">/ 16 GB</span>
+            <span className="text-xs font-mono text-ink-muted">/ 16 GB</span>
           </div>
-          <div className="w-full bg-dark-950 h-1.5 rounded-full mt-2 overflow-hidden border border-slate-800/60">
+          <div className="w-full bg-paper-200 h-1.5 rounded-full mt-2 overflow-hidden border border-paper-300">
             <div 
-              className={`h-full transition-colors ${
-                memoryResult.isOvercommitted ? 'bg-rose-500 w-full' : 'bg-emerald-400 w-[85%]'
+              className={`h-full transition-all ${
+                memoryResult.isOvercommitted ? 'bg-red-600 w-full' : 'bg-emerald-600 w-[85%]'
               }`} 
             />
           </div>
         </div>
 
-        <p className={`text-[10px] mt-2 leading-tight font-mono ${
-          memoryResult.isOvercommitted ? 'text-rose-400' : 'text-emerald-400'
+        <p className={`text-[10px] mt-2 leading-tight font-mono font-medium ${
+          memoryResult.isOvercommitted ? 'text-red-700' : 'text-emerald-700'
         }`}>
           {memoryResult.isOvercommitted 
             ? `+${memoryResult.overcommitAmountGB} GB overcommit (paging)` 
@@ -96,33 +96,33 @@ export const MetricCards: React.FC = () => {
       </div>
 
       {/* 3. Disk Utilization Card */}
-      <div className="glass-panel rounded-xl p-3.5 flex flex-col justify-between border border-slate-800/80">
+      <div className="bg-paper-50 rounded-lg p-3.5 flex flex-col justify-between border border-paper-300 shadow-xs">
         <div className="flex items-center justify-between">
-          <span className="text-[11px] font-mono text-slate-400">
+          <span className="text-[11px] font-mono text-ink-secondary">
             Disk request load
           </span>
-          <div className="p-1 rounded bg-dark-850 text-slate-400 border border-slate-800">
+          <div className="p-1 rounded bg-paper-200 text-ink-muted border border-paper-300">
             <Database className="w-3.5 h-3.5" />
           </div>
         </div>
 
         <div className="mt-2">
           <div className="flex items-baseline gap-1.5">
-            <span className="text-xl font-semibold font-mono text-white">
+            <span className="text-xl font-semibold font-mono text-ink-primary">
               {ioResult.totalDiskDemandReqPerSec}
             </span>
-            <span className="text-xs font-mono text-slate-400">/ 100 req/s</span>
+            <span className="text-xs font-mono text-ink-muted">/ 100 req/s</span>
           </div>
-          <div className="w-full bg-dark-950 h-1.5 rounded-full mt-2 overflow-hidden border border-slate-800/60">
+          <div className="w-full bg-paper-200 h-1.5 rounded-full mt-2 overflow-hidden border border-paper-300">
             <div 
-              className={`h-full transition-colors ${
-                ioResult.isOverloaded ? 'bg-rose-500 w-full' : 'bg-emerald-400 w-[70%]'
+              className={`h-full transition-all ${
+                ioResult.isOverloaded ? 'bg-red-600 w-full' : 'bg-emerald-600 w-[70%]'
               }`} 
             />
           </div>
         </div>
 
-        <p className="text-[10px] text-slate-400 mt-2 leading-tight">
+        <p className="text-[10px] text-ink-muted mt-2 leading-tight">
           {optimizations.ioPrioritization 
             ? 'I/O prioritized: game assets jump queue' 
             : 'Overload: +20 req/s queue accumulation'}
@@ -130,46 +130,46 @@ export const MetricCards: React.FC = () => {
       </div>
 
       {/* 4. Network & PIO/DMA Card */}
-      <div className="glass-panel rounded-xl p-3.5 flex flex-col justify-between border border-slate-800/80">
+      <div className="bg-paper-50 rounded-lg p-3.5 flex flex-col justify-between border border-paper-300 shadow-xs">
         <div className="flex items-center justify-between">
-          <span className="text-[11px] font-mono text-slate-400">
+          <span className="text-[11px] font-mono text-ink-secondary">
             Network & DMA
           </span>
-          <div className="p-1 rounded bg-dark-850 text-slate-400 border border-slate-800">
+          <div className="p-1 rounded bg-paper-200 text-ink-muted border border-paper-300">
             <Network className="w-3.5 h-3.5" />
           </div>
         </div>
 
         <div className="mt-2">
           <div className="flex items-baseline gap-1.5">
-            <span className="text-xl font-semibold font-mono text-white">
+            <span className="text-xl font-semibold font-mono text-ink-primary">
               100
             </span>
-            <span className="text-xs font-mono text-slate-400">Mbps (12.5 MB/s)</span>
+            <span className="text-xs font-mono text-ink-muted">Mbps (12.5 MB/s)</span>
           </div>
-          <div className="w-full bg-dark-950 h-1.5 rounded-full mt-2 overflow-hidden border border-slate-800/60">
+          <div className="w-full bg-paper-200 h-1.5 rounded-full mt-2 overflow-hidden border border-paper-300">
             <div 
-              className={`h-full transition-colors ${
-                isDma ? 'bg-emerald-400 w-[1%]' : 'bg-rose-500 w-[31%]'
+              className={`h-full transition-all ${
+                isDma ? 'bg-emerald-600 w-[1%]' : 'bg-red-600 w-[31%]'
               }`} 
             />
           </div>
         </div>
 
-        <p className="text-[10px] text-slate-400 mt-2 leading-tight font-mono">
-          CPU cost: <span className={isDma ? 'text-emerald-400 font-semibold' : 'text-rose-400 font-semibold'}>
+        <p className="text-[10px] text-ink-muted mt-2 leading-tight font-mono">
+          CPU cost: <span className={isDma ? 'text-emerald-700 font-semibold' : 'text-red-700 font-semibold'}>
             {ioResult.cpuOverheadPercent}%
           </span> {isDma ? '(DMA)' : '(PIO copy)'}
         </p>
       </div>
 
       {/* 5. Target FPS Card */}
-      <div className="glass-panel rounded-xl p-3.5 flex flex-col justify-between border border-slate-800/80">
+      <div className="bg-paper-50 rounded-lg p-3.5 flex flex-col justify-between border border-paper-300 shadow-xs">
         <div className="flex items-center justify-between">
-          <span className="text-[11px] font-mono text-slate-400">
+          <span className="text-[11px] font-mono text-ink-secondary">
             Rendered frame rate
           </span>
-          <div className="p-1 rounded bg-dark-850 text-slate-400 border border-slate-800">
+          <div className="p-1 rounded bg-paper-200 text-ink-muted border border-paper-300">
             <Activity className="w-3.5 h-3.5" />
           </div>
         </div>
@@ -177,35 +177,35 @@ export const MetricCards: React.FC = () => {
         <div className="mt-2">
           <div className="flex items-baseline gap-1.5">
             <span className={`text-xl font-semibold font-mono ${
-              fps === 60 ? 'text-emerald-400' : 'text-rose-400'
+              fps === 60 ? 'text-emerald-700' : 'text-red-700'
             }`}>
               {fps}
             </span>
-            <span className="text-xs font-mono text-slate-400">/ 60 FPS</span>
+            <span className="text-xs font-mono text-ink-muted">/ 60 FPS</span>
           </div>
-          <div className="w-full bg-dark-950 h-1.5 rounded-full mt-2 overflow-hidden border border-slate-800/60">
+          <div className="w-full bg-paper-200 h-1.5 rounded-full mt-2 overflow-hidden border border-paper-300">
             <div 
-              className={`h-full transition-colors ${
-                fps === 60 ? 'bg-emerald-400 w-full' : 'bg-rose-500 w-[46%]'
+              className={`h-full transition-all ${
+                fps === 60 ? 'bg-emerald-600 w-full' : 'bg-red-600 w-[46%]'
               }`} 
             />
           </div>
         </div>
 
         <p className={`text-[10px] mt-2 leading-tight font-medium ${
-          fps === 60 ? 'text-emerald-400' : 'text-rose-400'
+          fps === 60 ? 'text-emerald-700' : 'text-red-700'
         }`}>
           {fps === 60 ? 'Stable 60 FPS target' : 'Microstuttering detected'}
         </p>
       </div>
 
       {/* 6. Frame Deadline Status Card */}
-      <div className="glass-panel rounded-xl p-3.5 flex flex-col justify-between border border-slate-800/80">
+      <div className="bg-paper-50 rounded-lg p-3.5 flex flex-col justify-between border border-paper-300 shadow-xs">
         <div className="flex items-center justify-between">
-          <span className="text-[11px] font-mono text-slate-400">
+          <span className="text-[11px] font-mono text-ink-secondary">
             Frame deadline
           </span>
-          <div className="p-1 rounded bg-dark-850 text-slate-400 border border-slate-800">
+          <div className="p-1 rounded bg-paper-200 text-ink-muted border border-paper-300">
             <Clock className="w-3.5 h-3.5" />
           </div>
         </div>
@@ -213,27 +213,27 @@ export const MetricCards: React.FC = () => {
         <div className="mt-2">
           <div className="flex items-baseline gap-1.5">
             <span className={`text-xl font-semibold font-mono ${
-              !hasDeadlineViolation ? 'text-emerald-400' : 'text-rose-400'
+              !hasDeadlineViolation ? 'text-emerald-700' : 'text-red-700'
             }`}>
               {schedulerResult.gameMaxInterSliceWait} ms
             </span>
           </div>
-          <div className="w-full bg-dark-950 h-1.5 rounded-full mt-2 overflow-hidden relative border border-slate-800/60">
+          <div className="w-full bg-paper-200 h-1.5 rounded-full mt-2 overflow-hidden relative border border-paper-300">
             <div 
-              className={`h-full transition-colors ${
-                !hasDeadlineViolation ? 'bg-emerald-400' : 'bg-rose-500'
+              className={`h-full transition-all ${
+                !hasDeadlineViolation ? 'bg-emerald-600' : 'bg-red-600'
               }`}
               style={{ width: `${Math.min(100, (schedulerResult.gameMaxInterSliceWait / 20) * 100)}%` }}
             />
           </div>
         </div>
 
-        <p className="text-[10px] text-slate-400 mt-2 leading-tight">
-          Budget: <span className="font-mono text-slate-200">16.67 ms</span>{' '}
+        <p className="text-[10px] text-ink-muted mt-2 leading-tight">
+          Budget: <span className="font-mono text-ink-primary font-medium">16.67 ms</span>{' '}
           {hasDeadlineViolation ? (
-            <span className="text-rose-400 font-medium">(missed)</span>
+            <span className="text-red-700 font-semibold">(missed)</span>
           ) : (
-            <span className="text-emerald-400 font-medium">(met)</span>
+            <span className="text-emerald-700 font-semibold">(met)</span>
           )}
         </p>
       </div>

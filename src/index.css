@@ -4,40 +4,41 @@
 
 @layer base {
   body {
-    background-color: #080b11;
-    color: #e2e8f0;
+    background-color: #f7f4ee;
+    color: #1f1b16;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
   }
 }
 
-/* Custom scrollbars */
+/* Custom scrollbars for warm paper theme */
 ::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #090d14;
+  background: #f0ece3;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1e2638;
+  background: #dcd5c7;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #2d374d;
+  background: #c7bead;
 }
 
-/* Crisp instrument panels with hairline borders (6-10% opacity) */
+/* Technical Draft paper surfaces with hairline borders */
 .glass-panel {
-  background: #0d121c;
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: #fdfbf7;
+  border: 1px solid #e7e2d7;
+  box-shadow: 0 1px 2px 0 rgba(31, 27, 22, 0.04);
 }
 
 .surface-raised {
-  background: #121824;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #efe9df;
+  border: 1px solid #ded6c8;
 }
 
 .surface-subtle {
-  background: #090d14;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: #f7f4ee;
+  border: 1px solid #e7e2d7;
 }

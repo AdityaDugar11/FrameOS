@@ -4,24 +4,25 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
-  darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        dark: {
-          950: '#070a0f',
-          900: '#0b0f17',
-          850: '#101622',
-          800: '#161e2e',
-          700: '#202b40',
-          600: '#2c3a54',
+        paper: {
+          50: '#fdfbf7',
+          100: '#f7f4ee',
+          200: '#efe9df',
+          300: '#e7e2d7',
+          400: '#dcd5c7',
         },
-        cyber: {
-          blue: '#00d0e6',
-          violet: '#7c3aed',
-          red: '#f43f5e',
-          green: '#10b981',
-          amber: '#f59e0b',
+        ink: {
+          primary: '#1f1b16',
+          secondary: '#5e554a',
+          muted: '#7b7266',
+          subtle: '#9e968a',
+        },
+        copper: {
+          600: '#c2410c',
+          700: '#9a3412',
         }
       },
       fontFamily: {

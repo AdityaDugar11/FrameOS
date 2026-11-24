@@ -3,8 +3,7 @@ import {
   AlertOctagon, 
   CheckCircle2, 
   Cpu, 
-  HardDrive, 
-  Sparkles,
+  HardDrive
 } from 'lucide-react';
 import { useFrameOSStore } from '../../store/useFrameOSStore';
 
@@ -67,18 +66,18 @@ export const Header: React.FC = () => {
   const currentInfo = tabTitles[activeTab] || tabTitles.overview;
 
   return (
-    <header className="h-16 bg-dark-900 border-b border-slate-800/80 px-6 flex items-center justify-between shrink-0 select-none z-10">
+    <header className="h-16 bg-paper-50 border-b border-paper-300 px-6 flex items-center justify-between shrink-0 select-none z-10">
       {/* Title & Context */}
       <div>
         <div className="flex items-center gap-2">
-          <h1 className="text-sm font-semibold text-slate-100 tracking-tight">
+          <h1 className="text-sm font-semibold text-ink-primary tracking-tight">
             {currentInfo.title}
           </h1>
-          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-dark-800 text-slate-400 border border-slate-700/60">
-            Case study model
+          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-paper-200 text-ink-secondary border border-paper-300 font-medium">
+            Academic case study model
           </span>
         </div>
-        <p className="text-xs text-slate-400 truncate max-w-md">
+        <p className="text-xs text-ink-secondary truncate max-w-md">
           {currentInfo.subtitle}
         </p>
       </div>
@@ -86,36 +85,36 @@ export const Header: React.FC = () => {
       {/* Quick Telemetry Bar */}
       <div className="flex items-center gap-3">
         {/* FPS Ticker */}
-        <div className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border font-mono text-xs ${
+        <div className={`flex items-center gap-2 px-3 py-1.5 rounded-md border font-mono text-xs ${
           currentFPS === 60
-            ? 'bg-emerald-950/20 border-emerald-800/50 text-emerald-300'
-            : 'bg-rose-950/20 border-rose-800/50 text-rose-300'
+            ? 'bg-emerald-50 border-emerald-200 text-emerald-900'
+            : 'bg-red-50 border-red-200 text-red-900'
         }`}>
           <span className={`w-2 h-2 rounded-full ${
-            currentFPS === 60 ? 'bg-emerald-400' : 'bg-rose-500'
+            currentFPS === 60 ? 'bg-emerald-600' : 'bg-red-600'
           }`} />
           <div className="flex flex-col">
-            <span className="text-[9px] text-slate-400 leading-none">Frame rate</span>
+            <span className="text-[9px] text-ink-muted leading-none">Frame rate</span>
             <span className="font-semibold text-xs leading-tight">{currentFPS} FPS</span>
           </div>
-          <span className="text-[10px] text-slate-400 border-l border-slate-700/60 pl-2 ml-1">
+          <span className="text-[10px] text-ink-secondary border-l border-paper-300 pl-2 ml-1">
             {frameTimeMs} ms
           </span>
         </div>
 
         {/* CPU & RAM Telemetry Pills */}
-        <div className="hidden lg:flex items-center gap-2 bg-dark-850 px-3 py-1.5 rounded-lg border border-slate-800 text-xs font-mono">
-          <div className="flex items-center gap-1.5 text-slate-300">
-            <Cpu className="w-3.5 h-3.5 text-slate-400" />
-            <span className="text-slate-400 text-[10px]">CPU:</span>
-            <span className="text-slate-200 font-semibold">41.2%</span>
-            <span className="text-[10px] text-slate-400 ml-0.5">(stalling on I/O)</span>
+        <div className="hidden lg:flex items-center gap-2 bg-paper-200 px-3 py-1.5 rounded-md border border-paper-300 text-xs font-mono">
+          <div className="flex items-center gap-1.5 text-ink-primary">
+            <Cpu className="w-3.5 h-3.5 text-ink-muted" />
+            <span className="text-ink-secondary text-[10px]">CPU:</span>
+            <span className="font-semibold">41.2%</span>
+            <span className="text-[10px] text-ink-muted ml-0.5">(stalling on I/O)</span>
           </div>
-          <div className="h-3 w-px bg-slate-800 mx-1" />
-          <div className="flex items-center gap-1.5 text-slate-300">
-            <HardDrive className="w-3.5 h-3.5 text-slate-400" />
-            <span className="text-slate-400 text-[10px]">RAM:</span>
-            <span className={memoryResult.isOvercommitted ? 'text-rose-400 font-semibold' : 'text-emerald-400 font-semibold'}>
+          <div className="h-3 w-px bg-paper-300 mx-1" />
+          <div className="flex items-center gap-1.5 text-ink-primary">
+            <HardDrive className="w-3.5 h-3.5 text-ink-muted" />
+            <span className="text-ink-secondary text-[10px]">RAM:</span>
+            <span className={memoryResult.isOvercommitted ? 'text-red-700 font-semibold' : 'text-emerald-700 font-semibold'}>
               {memoryResult.totalMemoryDemandGB} / 16 GB
             </span>
           </div>
@@ -124,15 +123,15 @@ export const Header: React.FC = () => {
         {/* Bottleneck Warning / Success Badge */}
         <div className="flex items-center gap-2">
           {totalBottlenecks > 0 ? (
-            <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-rose-950/20 border border-rose-800/50 text-rose-300 text-xs font-medium">
-              <AlertOctagon className="w-3.5 h-3.5 text-rose-400 shrink-0" />
+            <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md bg-red-50 border border-red-200 text-red-800 text-xs font-medium">
+              <AlertOctagon className="w-3.5 h-3.5 text-red-600 shrink-0" />
               <span className="hidden sm:inline font-mono text-[11px]">
                 {totalBottlenecks} bottlenecks active
               </span>
             </div>
           ) : (
-            <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-emerald-950/20 border border-emerald-800/50 text-emerald-300 text-xs font-medium">
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+            <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-medium">
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
               <span className="hidden sm:inline font-mono text-[11px]">
                 System stable (60 FPS)
               </span>
@@ -143,14 +142,14 @@ export const Header: React.FC = () => {
           {isAllOptimized ? (
             <button
               onClick={resetAllOptimizations}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-dark-800 hover:bg-dark-750 text-slate-300 hover:text-white text-xs font-medium border border-slate-700 transition-colors"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-paper-100 hover:bg-paper-200 text-ink-primary text-xs font-medium border border-paper-300 transition-colors shadow-xs"
             >
               <span>Revert to baseline</span>
             </button>
           ) : (
             <button
               onClick={applyAllOptimizations}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-black font-semibold text-xs transition-colors"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-copper-600 hover:bg-copper-700 text-white font-medium text-xs transition-colors shadow-xs"
             >
               <span>Apply all fixes</span>
             </button>
