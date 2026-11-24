@@ -19,7 +19,7 @@ export const ArchitectureDiagram: React.FC = () => {
       impactOnGaming: 'Online game loop executes physics, render command buffer construction, and network state reconciliation.',
       bottleneckRisk: 'Background processes (browser, AV, download) compete for CPU slices and inflate memory demand to 17 GB.',
       frameOsOptimization: 'Priority segregation: Game tagged as high priority real-time interactive process.',
-      color: '#00d0e6',
+      color: '#0284c7',
     },
     pcb: {
       id: 'pcb',
@@ -30,7 +30,7 @@ export const ArchitectureDiagram: React.FC = () => {
       impactOnGaming: 'Every context switch between game and background processes incurs PCB register state save/restore overhead.',
       bottleneckRisk: 'Frequent switching destroys cache locality and increases pipeline stalls.',
       frameOsOptimization: 'Context switch minimization through foreground-weighted round robin (longer 8ms slices for game).',
-      color: '#38bdf8',
+      color: '#0369a1',
     },
     readyQueue: {
       id: 'readyQueue',
@@ -41,7 +41,7 @@ export const ArchitectureDiagram: React.FC = () => {
       impactOnGaming: 'Determines the inter-slice latency for the game process.',
       bottleneckRisk: 'When 5 background processes sit in a flat FIFO queue, the game waits 19 ms, violating the 16.67 ms deadline.',
       frameOsOptimization: 'Foreground-weighted round robin with aging ensures game cycles within 12 ms without starving background tasks.',
-      color: '#818cf8',
+      color: '#4338ca',
     },
     scheduler: {
       id: 'scheduler',
@@ -52,7 +52,7 @@ export const ArchitectureDiagram: React.FC = () => {
       impactOnGaming: 'Controls quantum time slice duration and preemption mechanics.',
       bottleneckRisk: 'Flat 4ms round robin treats 60 FPS real-time rendering identical to background batch downloads.',
       frameOsOptimization: 'Dynamic quantum differentiation (Game = 8ms, Background = 2ms).',
-      color: '#a855f7',
+      color: '#7e22ce',
     },
     cpu: {
       id: 'cpu',
@@ -63,7 +63,7 @@ export const ArchitectureDiagram: React.FC = () => {
       impactOnGaming: 'Runs game physics, AI, and geometry draw call submission.',
       bottleneckRisk: 'Sits 68% idle during mechanical HDD page faults while game freezes.',
       frameOsOptimization: 'Eliminates memory paging stalls to keep CPU executing productively.',
-      color: '#10b981',
+      color: '#15803d',
     },
     mmu: {
       id: 'mmu',
@@ -74,7 +74,7 @@ export const ArchitectureDiagram: React.FC = () => {
       impactOnGaming: 'Provides 2ns ultra-low latency operand access for game vertex and matrix math.',
       bottleneckRisk: 'Cache pollution from 6 rotating processes reduces hit ratio from 95% to 85% (latency jumps from 6.9ns to 16.7ns).',
       frameOsOptimization: 'Protected working-set caching and fewer context switches preserve L1/L2 cache lines.',
-      color: '#f59e0b',
+      color: '#d97706',
     },
     ram: {
       id: 'ram',
@@ -85,7 +85,7 @@ export const ArchitectureDiagram: React.FC = () => {
       impactOnGaming: 'Holds active game engine textures, sound banks, vertex buffers, and world geometry.',
       bottleneckRisk: '17 GB total demand exceeds 16 GB capacity, triggering page eviction to secondary storage.',
       frameOsOptimization: 'Working-set trimming drops background memory to 13.7 GB, keeping game 100% resident.',
-      color: '#ec4899',
+      color: '#be185d',
     },
     pagefile: {
       id: 'pagefile',
@@ -96,7 +96,7 @@ export const ArchitectureDiagram: React.FC = () => {
       impactOnGaming: 'A single page fault on an HDD takes 8 ms (half the entire frame budget).',
       bottleneckRisk: 'Mechanical HDD page fault latency (8,000,000 ns) causes severe frame stutter.',
       frameOsOptimization: 'Migration to NVMe SSD (100 µs) and working-set trimming to eliminate paging entirely.',
-      color: '#f43f5e',
+      color: '#b91c1c',
     },
     diskQueue: {
       id: 'diskQueue',
@@ -107,7 +107,7 @@ export const ArchitectureDiagram: React.FC = () => {
       impactOnGaming: 'Streams dynamic game world level assets and textures.',
       bottleneckRisk: '120 req/s load on 100 req/s capacity causes disk queue accumulation (+20 req/s deficit).',
       frameOsOptimization: 'I/O prioritization tags game requests with real-time priority, jumping background AV scans.',
-      color: '#f97316',
+      color: '#c2410c',
     },
     dma: {
       id: 'dma',
@@ -118,7 +118,7 @@ export const ArchitectureDiagram: React.FC = () => {
       impactOnGaming: 'Frees the CPU to calculate game frames while network downloads continue.',
       bottleneckRisk: 'Without DMA (PIO), CPU wastes 31.25% of cycles executing byte-copy instructions for network traffic.',
       frameOsOptimization: 'DMA mode reduces network CPU overhead to 0.38%.',
-      color: '#10b981',
+      color: '#15803d',
     },
     apic: {
       id: 'apic',
@@ -129,28 +129,28 @@ export const ArchitectureDiagram: React.FC = () => {
       impactOnGaming: 'Processes mouse movements and network packet arrival notifications.',
       bottleneckRisk: 'Unmoderated packet storms (8,500 Hz) cause constant CPU preemption and pipeline flushes.',
       frameOsOptimization: 'Interrupt moderation coalesces network packets into 800 Hz batches.',
-      color: '#eab308',
+      color: '#b45309',
     },
   };
 
   return (
-    <div className="glass-panel rounded-xl p-5 border border-slate-800/80 space-y-4">
+    <div className="bg-paper-50 rounded-lg p-5 border border-paper-300 shadow-xs space-y-4">
       {/* Title & Help */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
           <div className="flex items-center gap-2">
-            <Layers className="w-4 h-4 text-slate-400" />
-            <h3 className="text-xs font-mono font-medium uppercase tracking-wider text-slate-200">
+            <Layers className="w-4 h-4 text-ink-muted" />
+            <h3 className="text-xs font-mono font-semibold uppercase tracking-wider text-ink-primary">
               Interactive system architecture map
             </h3>
           </div>
-          <p className="text-[11px] text-slate-400">
+          <p className="text-[11px] text-ink-secondary">
             Click any architectural subsystem node below to inspect its kernel role, bottleneck risk, and FrameOS optimization
           </p>
         </div>
 
-        <span className="text-xs font-mono text-slate-400 flex items-center gap-1.5 bg-dark-950 px-2.5 py-1 rounded-lg border border-slate-800">
-          <MousePointer className="w-3.5 h-3.5" />
+        <span className="text-xs font-mono text-ink-secondary flex items-center gap-1.5 bg-paper-200 px-2.5 py-1 rounded border border-paper-300">
+          <MousePointer className="w-3.5 h-3.5 text-ink-muted" />
           Click any component to inspect
         </span>
       </div>
@@ -158,32 +158,32 @@ export const ArchitectureDiagram: React.FC = () => {
       {/* Structured Architecture Blueprint Grid */}
       <div className="space-y-3">
         {/* Layer 1: User Space */}
-        <div className="p-3.5 rounded-xl bg-dark-950 border border-slate-800">
+        <div className="p-3.5 rounded-lg bg-paper-100 border border-paper-300 shadow-xs">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-[10px] font-mono uppercase tracking-wider text-cyan-400 font-semibold">
+            <span className="text-[10px] font-mono uppercase tracking-wider text-copper-700 font-semibold">
               User space (Ring 3)
             </span>
-            <span className="text-[10px] font-mono text-slate-400">
+            <span className="text-[10px] font-mono text-ink-muted">
               Applications & game threads
             </span>
           </div>
 
           <div 
             onClick={() => setSelectedComp(components.apps)}
-            className="p-3 rounded-lg border border-slate-700/80 bg-dark-900 hover:border-slate-600 transition-colors cursor-pointer flex flex-col sm:flex-row sm:items-center justify-between gap-2"
+            className="p-3 rounded border border-paper-300 bg-paper-50 hover:border-paper-400 transition-colors cursor-pointer flex flex-col sm:flex-row sm:items-center justify-between gap-2 shadow-xs"
           >
             <div className="flex items-center gap-2.5">
-              <span className="w-2.5 h-2.5 rounded-full bg-cyan-400" />
+              <span className="w-2.5 h-2.5 rounded-full bg-copper-600" />
               <div>
-                <h4 className="text-xs font-medium text-white font-mono">
+                <h4 className="text-xs font-semibold text-ink-primary font-mono">
                   User applications: Game (High), Browser (Med), Antivirus (Low), Download, Music, Chat
                 </h4>
-                <p className="text-[11px] text-slate-400">
+                <p className="text-[11px] text-ink-secondary">
                   Total CPU burst: 55 ms · Total RAM demand: 17 GB
                 </p>
               </div>
             </div>
-            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-dark-850 text-slate-300 border border-slate-800 shrink-0">
+            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-paper-200 text-ink-primary border border-paper-300 shrink-0 font-medium">
               Inspect node →
             </span>
           </div>
@@ -191,18 +191,18 @@ export const ArchitectureDiagram: React.FC = () => {
 
         {/* Downward Transition Arrow */}
         <div className="flex justify-center -my-2 z-10 relative">
-          <div className="p-1 rounded-full bg-dark-900 border border-slate-800 text-slate-400">
+          <div className="p-1 rounded-full bg-paper-200 border border-paper-300 text-ink-muted shadow-xs">
             <ArrowDown className="w-3 h-3" />
           </div>
         </div>
 
         {/* Layer 2: Kernel Process Management */}
-        <div className="p-3.5 rounded-xl bg-dark-950 border border-slate-800">
+        <div className="p-3.5 rounded-lg bg-paper-100 border border-paper-300 shadow-xs">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-[10px] font-mono uppercase tracking-wider text-blue-400 font-semibold">
+            <span className="text-[10px] font-mono uppercase tracking-wider text-ink-primary font-semibold">
               Kernel execution & scheduling subsystem (Ring 0)
             </span>
-            <span className="text-[10px] font-mono text-slate-400">
+            <span className="text-[10px] font-mono text-ink-muted">
               Context switching & quantum dispatch
             </span>
           </div>
@@ -217,7 +217,7 @@ export const ArchitectureDiagram: React.FC = () => {
               <div
                 key={id}
                 onClick={() => setSelectedComp(comp)}
-                className="p-3 rounded-lg border border-slate-800 bg-dark-900 hover:border-slate-700 transition-colors cursor-pointer flex flex-col justify-between"
+                className="p-3 rounded border border-paper-300 bg-paper-50 hover:border-paper-400 transition-colors cursor-pointer flex flex-col justify-between shadow-xs"
               >
                 <div>
                   <div className="flex items-center gap-2 mb-1">
@@ -225,15 +225,15 @@ export const ArchitectureDiagram: React.FC = () => {
                       className="w-2 h-2 rounded-full" 
                       style={{ backgroundColor: comp.color }} 
                     />
-                    <h5 className="text-xs font-medium font-mono text-white leading-tight">
+                    <h5 className="text-xs font-semibold font-mono text-ink-primary leading-tight">
                       {comp.name}
                     </h5>
                   </div>
-                  <p className="text-[11px] text-slate-400 leading-snug">
+                  <p className="text-[11px] text-ink-secondary leading-snug">
                     {comp.role}
                   </p>
                 </div>
-                <span className="text-[9px] font-mono text-slate-400 mt-2 block">
+                <span className="text-[9px] font-mono text-ink-muted mt-2 block font-medium">
                   Inspect →
                 </span>
               </div>
@@ -243,18 +243,18 @@ export const ArchitectureDiagram: React.FC = () => {
 
         {/* Downward Transition Arrow */}
         <div className="flex justify-center -my-2 z-10 relative">
-          <div className="p-1 rounded-full bg-dark-900 border border-slate-800 text-slate-400">
+          <div className="p-1 rounded-full bg-paper-200 border border-paper-300 text-ink-muted shadow-xs">
             <ArrowDown className="w-3 h-3" />
           </div>
         </div>
 
         {/* Layer 3: Memory Subsystem */}
-        <div className="p-3.5 rounded-xl bg-dark-950 border border-slate-800">
+        <div className="p-3.5 rounded-lg bg-paper-100 border border-paper-300 shadow-xs">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-[10px] font-mono uppercase tracking-wider text-purple-400 font-semibold">
+            <span className="text-[10px] font-mono uppercase tracking-wider text-ink-primary font-semibold">
               Virtual memory & paging subsystem
             </span>
-            <span className="text-[10px] font-mono text-slate-400">
+            <span className="text-[10px] font-mono text-ink-muted">
               MMU, L1/L2/L3 cache, 16 GB RAM & pagefile
             </span>
           </div>
@@ -268,7 +268,7 @@ export const ArchitectureDiagram: React.FC = () => {
               <div
                 key={id}
                 onClick={() => setSelectedComp(comp)}
-                className="p-3 rounded-lg border border-slate-800 bg-dark-900 hover:border-slate-700 transition-colors cursor-pointer flex flex-col justify-between"
+                className="p-3 rounded border border-paper-300 bg-paper-50 hover:border-paper-400 transition-colors cursor-pointer flex flex-col justify-between shadow-xs"
               >
                 <div>
                   <div className="flex items-center gap-2 mb-1">
@@ -276,15 +276,15 @@ export const ArchitectureDiagram: React.FC = () => {
                       className="w-2 h-2 rounded-full" 
                       style={{ backgroundColor: comp.color }} 
                     />
-                    <h5 className="text-xs font-medium font-mono text-white leading-tight">
+                    <h5 className="text-xs font-semibold font-mono text-ink-primary leading-tight">
                       {comp.name}
                     </h5>
                   </div>
-                  <p className="text-[11px] text-slate-400 leading-snug">
+                  <p className="text-[11px] text-ink-secondary leading-snug">
                     {comp.role}
                   </p>
                 </div>
-                <span className="text-[9px] font-mono text-slate-400 mt-2 block">
+                <span className="text-[9px] font-mono text-ink-muted mt-2 block font-medium">
                   Inspect →
                 </span>
               </div>
@@ -294,18 +294,18 @@ export const ArchitectureDiagram: React.FC = () => {
 
         {/* Downward Transition Arrow */}
         <div className="flex justify-center -my-2 z-10 relative">
-          <div className="p-1 rounded-full bg-dark-900 border border-slate-800 text-slate-400">
+          <div className="p-1 rounded-full bg-paper-200 border border-paper-300 text-ink-muted shadow-xs">
             <ArrowDown className="w-3 h-3" />
           </div>
         </div>
 
         {/* Layer 4: I/O Hardware */}
-        <div className="p-3.5 rounded-xl bg-dark-950 border border-slate-800">
+        <div className="p-3.5 rounded-lg bg-paper-100 border border-paper-300 shadow-xs">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-[10px] font-mono uppercase tracking-wider text-emerald-400 font-semibold">
+            <span className="text-[10px] font-mono uppercase tracking-wider text-ink-primary font-semibold">
               I/O devices, bus & hardware interrupts
             </span>
-            <span className="text-[10px] font-mono text-slate-400">
+            <span className="text-[10px] font-mono text-ink-muted">
               Storage queues, DMA offloading, and APIC interrupts
             </span>
           </div>
@@ -319,7 +319,7 @@ export const ArchitectureDiagram: React.FC = () => {
               <div
                 key={id}
                 onClick={() => setSelectedComp(comp)}
-                className="p-3 rounded-lg border border-slate-800 bg-dark-900 hover:border-slate-700 transition-colors cursor-pointer flex flex-col justify-between"
+                className="p-3 rounded border border-paper-300 bg-paper-50 hover:border-paper-400 transition-colors cursor-pointer flex flex-col justify-between shadow-xs"
               >
                 <div>
                   <div className="flex items-center gap-2 mb-1">
@@ -327,15 +327,15 @@ export const ArchitectureDiagram: React.FC = () => {
                       className="w-2 h-2 rounded-full" 
                       style={{ backgroundColor: comp.color }} 
                     />
-                    <h5 className="text-xs font-medium font-mono text-white leading-tight">
+                    <h5 className="text-xs font-semibold font-mono text-ink-primary leading-tight">
                       {comp.name}
                     </h5>
                   </div>
-                  <p className="text-[11px] text-slate-400 leading-snug">
+                  <p className="text-[11px] text-ink-secondary leading-snug">
                     {comp.role}
                   </p>
                 </div>
-                <span className="text-[9px] font-mono text-slate-400 mt-2 block">
+                <span className="text-[9px] font-mono text-ink-muted mt-2 block font-medium">
                   Inspect →
                 </span>
               </div>

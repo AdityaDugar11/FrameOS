@@ -113,18 +113,18 @@ export const OptimizationMatrix: React.FC = () => {
   return (
     <div className="space-y-4">
       {/* Central Control Action Banner */}
-      <div className="glass-panel rounded-xl p-5 border border-slate-800/80 flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="bg-paper-50 rounded-lg p-5 border border-paper-300 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h2 className="text-sm font-semibold text-white tracking-tight">
+          <h2 className="text-sm font-semibold text-ink-primary tracking-tight font-mono">
             Operating system kernel optimization matrix
           </h2>
-          <p className="text-xs text-slate-400 mt-1 max-w-xl leading-relaxed">
+          <p className="text-xs text-ink-secondary mt-1 max-w-xl leading-relaxed">
             Toggle individual OS kernel mechanisms below to observe their isolated effects, or apply all 8 optimizations simultaneously to eliminate all gaming PC bottlenecks.
           </p>
           <div className="flex items-center gap-2 mt-2 font-mono text-xs">
-            <span className="text-slate-400">Active optimizations:</span>
-            <span className={`px-2 py-0.5 rounded ${
-              isAllOptimized ? 'bg-emerald-950 text-emerald-400 border border-emerald-800' : 'bg-dark-950 text-slate-300 border border-slate-800'
+            <span className="text-ink-muted">Active optimizations:</span>
+            <span className={`px-2 py-0.5 rounded font-semibold border ${
+              isAllOptimized ? 'bg-emerald-100 text-emerald-800 border-emerald-300' : 'bg-paper-200 text-ink-secondary border-paper-300'
             }`}>
               {activeCount} / 8 applied
             </span>
@@ -135,18 +135,18 @@ export const OptimizationMatrix: React.FC = () => {
         <div className="flex flex-wrap items-center gap-2.5">
           <button
             onClick={resetAllOptimizations}
-            className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-mono font-medium text-slate-300 bg-dark-850 hover:bg-dark-800 border border-slate-800 transition-colors"
+            className="flex items-center gap-1.5 px-3 py-2 rounded text-xs font-mono font-medium text-ink-primary bg-paper-100 hover:bg-paper-200 border border-paper-300 transition-colors shadow-xs"
           >
-            <RotateCcw className="w-3.5 h-3.5" />
+            <RotateCcw className="w-3.5 h-3.5 text-ink-muted" />
             <span>Reset to baseline</span>
           </button>
 
           <button
             onClick={applyAllOptimizations}
-            className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-mono font-semibold transition-colors ${
+            className={`flex items-center gap-1.5 px-4 py-2 rounded text-xs font-mono font-semibold transition-colors shadow-xs ${
               isAllOptimized
-                ? 'bg-emerald-500 text-black'
-                : 'bg-cyan-500 hover:bg-cyan-400 text-black'
+                ? 'bg-emerald-100 text-emerald-800 border border-emerald-300'
+                : 'bg-copper-600 hover:bg-copper-700 text-white'
             }`}
           >
             {isAllOptimized ? (
@@ -171,44 +171,44 @@ export const OptimizationMatrix: React.FC = () => {
             <div
               key={card.key}
               onClick={() => toggleOptimization(card.key)}
-              className={`p-3.5 rounded-xl border transition-colors cursor-pointer flex flex-col justify-between select-none ${
+              className={`p-3.5 rounded-lg border transition-all cursor-pointer flex flex-col justify-between select-none shadow-xs ${
                 isEnabled
-                  ? 'bg-emerald-950/15 border-emerald-800/50'
-                  : 'bg-dark-900 border-slate-800/80 hover:border-slate-750'
+                  ? 'bg-emerald-50/50 border-emerald-200'
+                  : 'bg-paper-100 border-paper-300 hover:border-paper-400'
               }`}
             >
               <div>
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 font-medium">
+                  <span className="text-[10px] font-mono uppercase tracking-wider text-ink-muted font-semibold">
                     {card.category}
                   </span>
-                  <div className={`w-4 h-4 rounded flex items-center justify-center transition-colors ${
-                    isEnabled ? 'bg-emerald-500 text-black' : 'bg-dark-850 text-slate-400 border border-slate-700'
+                  <div className={`w-4 h-4 rounded flex items-center justify-center transition-colors shadow-xs ${
+                    isEnabled ? 'bg-emerald-600 text-white' : 'bg-paper-200 text-ink-muted border border-paper-300'
                   }`}>
                     {isEnabled ? <Check className="w-3 h-3 stroke-[3]" /> : null}
                   </div>
                 </div>
 
                 <div className="flex items-start gap-2 mb-1.5">
-                  <div className="p-1 rounded bg-dark-850 border border-slate-800 text-slate-300 mt-0.5">
+                  <div className="p-1 rounded bg-paper-200 border border-paper-300 text-ink-primary mt-0.5">
                     <Icon className="w-3.5 h-3.5" />
                   </div>
-                  <h4 className="text-xs font-medium text-white leading-tight">
+                  <h4 className="text-xs font-semibold text-ink-primary leading-tight">
                     {card.title}
                   </h4>
                 </div>
 
-                <p className="text-[11px] text-slate-400 mb-3 leading-relaxed">
+                <p className="text-[11px] text-ink-secondary mb-3 leading-relaxed">
                   {card.description}
                 </p>
               </div>
 
               {/* Before vs After Impact Snippet */}
-              <div className="p-2 rounded-lg bg-dark-950 border border-slate-800/80 font-mono text-[10px] space-y-0.5">
-                <div className="text-rose-400 truncate">
+              <div className="p-2 rounded bg-paper-50 border border-paper-300 font-mono text-[10px] space-y-0.5 shadow-xs">
+                <div className="text-red-700 truncate">
                   <span className="font-semibold">Before:</span> {card.baselineImpact}
                 </div>
-                <div className="text-emerald-400 truncate">
+                <div className="text-emerald-700 truncate">
                   <span className="font-semibold">After:</span> {card.proposedImpact}
                 </div>
               </div>

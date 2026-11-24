@@ -71,21 +71,21 @@ export const BeforeAfterComparison: React.FC = () => {
   ];
 
   return (
-    <div className="glass-panel rounded-xl p-5 border border-slate-800/80 space-y-4">
+    <div className="bg-paper-50 rounded-lg p-5 border border-paper-300 shadow-xs space-y-4">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
           <div className="flex items-center gap-2">
-            <Award className="w-4 h-4 text-slate-400" />
-            <h3 className="text-xs font-mono font-medium uppercase tracking-wider text-slate-200">
+            <Award className="w-4 h-4 text-ink-muted" />
+            <h3 className="text-xs font-mono font-semibold uppercase tracking-wider text-ink-primary">
               Benchmark verification: Baseline vs proposed mechanisms
             </h3>
           </div>
-          <p className="text-[11px] text-slate-400">
+          <p className="text-[11px] text-ink-secondary">
             Direct comparison of the 5 key academic metrics between default uniprocessor OS and FrameOS kernel optimizations
           </p>
         </div>
 
-        <span className="text-xs font-mono px-2.5 py-0.5 rounded bg-emerald-950/60 text-emerald-300 border border-emerald-800/60 font-medium">
+        <span className="text-xs font-mono px-2.5 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-300 font-semibold shadow-xs">
           All 5 bottlenecks resolved
         </span>
       </div>
@@ -95,35 +95,35 @@ export const BeforeAfterComparison: React.FC = () => {
         {comparisonData.map((item) => (
           <div 
             key={item.metric}
-            className="p-3 rounded-lg bg-dark-950 border border-slate-800 flex flex-col justify-between font-mono"
+            className="p-3 rounded-md bg-paper-100 border border-paper-300 flex flex-col justify-between font-mono shadow-xs"
           >
             <div>
-              <span className="text-[10px] text-slate-400 uppercase tracking-wider block">
+              <span className="text-[10px] text-ink-muted uppercase tracking-wider block font-semibold">
                 {item.metric}
               </span>
 
               <div className="flex items-baseline justify-between mt-1.5">
                 <div>
-                  <span className="text-[10px] text-slate-400 block">Baseline</span>
-                  <span className="text-xs font-semibold text-rose-400">
+                  <span className="text-[10px] text-ink-muted block">Baseline</span>
+                  <span className="text-xs font-semibold text-red-700">
                     {item.baseline} {item.unit}
                   </span>
                 </div>
 
-                <ArrowRight className="w-3.5 h-3.5 text-slate-400" />
+                <ArrowRight className="w-3.5 h-3.5 text-ink-muted" />
 
                 <div>
-                  <span className="text-[10px] text-slate-400 block">Proposed</span>
-                  <span className="text-sm font-semibold text-emerald-400">
+                  <span className="text-[10px] text-ink-muted block">Proposed</span>
+                  <span className="text-sm font-semibold text-emerald-700">
                     {item.proposed} {item.unit}
                   </span>
                 </div>
               </div>
             </div>
 
-            <div className="mt-2.5 pt-1.5 border-t border-slate-800/80 flex items-center justify-between text-[10px]">
-              <span className="text-slate-400 font-sans">Net gain:</span>
-              <span className="text-emerald-400 font-semibold font-mono">
+            <div className="mt-2.5 pt-1.5 border-t border-paper-300 flex items-center justify-between text-[10px]">
+              <span className="text-ink-secondary font-sans">Net gain:</span>
+              <span className="text-emerald-700 font-semibold font-mono">
                 {item.improvement}
               </span>
             </div>
@@ -132,22 +132,22 @@ export const BeforeAfterComparison: React.FC = () => {
       </div>
 
       {/* Grouped Comparison Bar Chart */}
-      <div className="p-3.5 rounded-lg bg-dark-950 border border-slate-800">
-        <h4 className="text-xs font-mono font-medium text-slate-300 uppercase tracking-wider mb-3">
+      <div className="p-3.5 rounded-lg bg-paper-100 border border-paper-300 shadow-xs">
+        <h4 className="text-xs font-mono font-semibold text-ink-primary uppercase tracking-wider mb-3">
           Visual performance delta
         </h4>
         <div className="h-52 w-full">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={chartData} margin={{ top: 10, right: 10, left: 0, bottom: 5 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#161e2e" />
-              <XAxis dataKey="name" stroke="#475569" tick={{ fontSize: 10, fill: '#64748b' }} />
-              <YAxis stroke="#475569" tick={{ fontSize: 10, fill: '#64748b' }} />
+              <CartesianGrid strokeDasharray="3 3" stroke="#e7e2d7" />
+              <XAxis dataKey="name" stroke="#7b7266" tick={{ fontSize: 10, fill: '#5e554a' }} />
+              <YAxis stroke="#7b7266" tick={{ fontSize: 10, fill: '#5e554a' }} />
               <Tooltip 
-                contentStyle={{ backgroundColor: '#0b0f17', borderColor: '#1e293b', borderRadius: '8px', fontSize: '11px', color: '#fff' }}
+                contentStyle={{ backgroundColor: '#fdfbf7', borderColor: '#ded6c8', borderRadius: '6px', fontSize: '11px', color: '#1f1b16' }}
               />
               <Legend wrapperStyle={{ fontSize: '11px', fontFamily: 'monospace' }} />
-              <Bar dataKey="Baseline" fill="#f43f5e" radius={[2, 2, 0, 0]} />
-              <Bar dataKey="Proposed" fill="#10b981" radius={[2, 2, 0, 0]} />
+              <Bar dataKey="Baseline" fill="#b91c1c" radius={[2, 2, 0, 0]} />
+              <Bar dataKey="Proposed" fill="#15803d" radius={[2, 2, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>

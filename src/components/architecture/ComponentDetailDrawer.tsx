@@ -1,8 +1,8 @@
 import React from 'react';
 import { 
   X, 
-  ShieldAlert,
-  Zap
+  ShieldAlert, 
+  Zap 
 } from 'lucide-react';
 
 export interface ArchitectureComponent {
@@ -26,18 +26,18 @@ export const ComponentDetailDrawer: React.FC<ComponentDetailDrawerProps> = ({ co
   if (!component) return null;
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex justify-end">
-      <div className="w-full max-w-md bg-dark-900 border-l border-slate-800 p-6 flex flex-col justify-between shadow-2xl h-full overflow-y-auto">
+    <div className="fixed inset-0 z-50 bg-ink-primary/40 backdrop-blur-xs flex justify-end">
+      <div className="w-full max-w-md bg-paper-50 border-l border-paper-300 p-6 flex flex-col justify-between shadow-2xl h-full overflow-y-auto text-ink-primary">
         <div>
           {/* Header */}
-          <div className="flex items-start justify-between pb-3.5 border-b border-slate-800">
+          <div className="flex items-start justify-between pb-3.5 border-b border-paper-300">
             <div>
-              <span className="text-[10px] font-mono uppercase tracking-wider text-slate-400 font-medium block mb-0.5">
+              <span className="text-[10px] font-mono uppercase tracking-wider text-ink-muted font-semibold block mb-0.5">
                 {component.layer} component
               </span>
-              <h3 className="text-sm font-semibold text-white font-mono flex items-center gap-2">
+              <h3 className="text-sm font-semibold text-ink-primary font-mono flex items-center gap-2">
                 <span 
-                  className="w-2.5 h-2.5 rounded-full shrink-0" 
+                  className="w-2.5 h-2.5 rounded-full shrink-0 shadow-xs" 
                   style={{ backgroundColor: component.color }}
                 />
                 {component.name}
@@ -45,7 +45,7 @@ export const ComponentDetailDrawer: React.FC<ComponentDetailDrawerProps> = ({ co
             </div>
             <button
               onClick={onClose}
-              className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-dark-800 transition-colors"
+              className="p-1 rounded text-ink-muted hover:text-ink-primary hover:bg-paper-200 transition-colors"
             >
               <X className="w-4 h-4" />
             </button>
@@ -54,39 +54,39 @@ export const ComponentDetailDrawer: React.FC<ComponentDetailDrawerProps> = ({ co
           {/* Body */}
           <div className="py-4 space-y-3.5 text-xs font-sans">
             <div>
-              <h4 className="text-[10px] font-mono uppercase tracking-wider text-slate-400 mb-1">
+              <h4 className="text-[10px] font-mono uppercase tracking-wider text-ink-muted font-semibold mb-1">
                 Operating systems definition:
               </h4>
-              <p className="text-slate-300 leading-relaxed bg-dark-950 p-2.5 rounded-lg border border-slate-800">
+              <p className="text-ink-secondary leading-relaxed bg-paper-100 p-2.5 rounded border border-paper-300 shadow-xs">
                 {component.academicDefinition}
               </p>
             </div>
 
             <div>
-              <h4 className="text-[10px] font-mono uppercase tracking-wider text-cyan-400 mb-1">
+              <h4 className="text-[10px] font-mono uppercase tracking-wider text-copper-700 font-semibold mb-1">
                 Impact on 60 FPS game loop:
               </h4>
-              <p className="text-slate-300 leading-relaxed">
+              <p className="text-ink-secondary leading-relaxed">
                 {component.impactOnGaming}
               </p>
             </div>
 
-            <div className="p-3 rounded-lg bg-rose-950/20 border border-rose-800/40 space-y-0.5">
-              <h4 className="text-[10px] font-mono uppercase tracking-wider text-rose-400 flex items-center gap-1.5 font-medium">
-                <ShieldAlert className="w-3.5 h-3.5" />
+            <div className="p-3 rounded bg-red-50 border border-red-200 space-y-0.5 shadow-xs">
+              <h4 className="text-[10px] font-mono uppercase tracking-wider text-red-800 flex items-center gap-1.5 font-semibold">
+                <ShieldAlert className="w-3.5 h-3.5 text-red-600" />
                 Baseline bottleneck risk:
               </h4>
-              <p className="text-rose-200 leading-relaxed">
+              <p className="text-red-900 leading-relaxed font-sans">
                 {component.bottleneckRisk}
               </p>
             </div>
 
-            <div className="p-3 rounded-lg bg-emerald-950/20 border border-emerald-800/40 space-y-0.5">
-              <h4 className="text-[10px] font-mono uppercase tracking-wider text-emerald-400 flex items-center gap-1.5 font-medium">
-                <Zap className="w-3.5 h-3.5" />
+            <div className="p-3 rounded bg-emerald-50 border border-emerald-200 space-y-0.5 shadow-xs">
+              <h4 className="text-[10px] font-mono uppercase tracking-wider text-emerald-800 flex items-center gap-1.5 font-semibold">
+                <Zap className="w-3.5 h-3.5 text-emerald-600" />
                 FrameOS mitigation:
               </h4>
-              <p className="text-emerald-200 leading-relaxed">
+              <p className="text-emerald-900 leading-relaxed font-sans">
                 {component.frameOsOptimization}
               </p>
             </div>
@@ -94,10 +94,10 @@ export const ComponentDetailDrawer: React.FC<ComponentDetailDrawerProps> = ({ co
         </div>
 
         {/* Footer */}
-        <div className="pt-3.5 border-t border-slate-800 flex justify-end">
+        <div className="pt-3.5 border-t border-paper-300 flex justify-end">
           <button
             onClick={onClose}
-            className="px-3.5 py-1.5 rounded-lg bg-dark-850 hover:bg-dark-800 text-slate-200 font-mono text-xs font-medium transition-colors"
+            className="px-3.5 py-1.5 rounded bg-ink-primary hover:bg-black text-paper-50 font-mono text-xs font-semibold transition-colors shadow-xs"
           >
             Close inspector
           </button>
