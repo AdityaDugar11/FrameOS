@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #06080d;
+    color: #e2e8f0;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #090d16;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #00f0ff55;
+}
+
+/* Glass-like subtle panels */
+.glass-panel {
+  background: rgba(13, 18, 30, 0.75);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.glass-panel-glow {
+  background: rgba(15, 22, 38, 0.85);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  box-shadow: 0 0 25px -5px rgba(0, 240, 255, 0.15);
+}
+
+.glass-panel-danger {
+  background: rgba(28, 12, 20, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 51, 102, 0.3);
+  box-shadow: 0 0 25px -5px rgba(255, 51, 102, 0.15);
+}
+
+.glass-panel-success {
+  background: rgba(10, 28, 22, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 255, 136, 0.3);
+  box-shadow: 0 0 25px -5px rgba(0, 255, 136, 0.15);
+}
+
+/* Scanline subtle overlay for high-tech monitor aesthetic */
+.scanlines {
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.25) 50%
+  ), linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.03),
+    rgba(0, 255, 0, 0.01),
+    rgba(0, 0, 255, 0.03)
+  );
+  background-size: 100% 3px, 6px 100%;
+  pointer-events: none;
+}
